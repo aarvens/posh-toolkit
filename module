@@ -1,0 +1,28 @@
+# Aaron's powershell module template
+# Written by Aaron Stevens
+# adapted from https://docs.microsoft.com/en-us/powershell/scripting/developer/module/how-to-write-a-powershell-script-module?view=powershell-7.2
+
+# notes:
+# save file as .psm1
+# directory where the module is saved must be the same name as the module. 
+# ie .\module\module.psm1
+# module's directory needs to be added to $env:PSMoudlePath
+
+# step 1 - create the help content
+# you can have as many parameters and examples as you need.
+
+<#
+ .Synopsis
+ .Description
+ .Parameter
+ .Example
+#>
+
+# step 2 - this is where your functions and code goes
+
+# step 3 - add Export-ModuleMember at the end of the file if you want to control
+# user access to the functions in the script.
+
+# Export-ModuleMember -Function [name of allowed function]
+
+

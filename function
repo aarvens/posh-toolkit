@@ -1,0 +1,78 @@
+# Aaron's powershell function template
+# Written by Aaron Stevens
+# adapated from https://docs.microsoft.com/en-us/powershell/scripting/learn/ps101/09-functions?view=powershell-7.2
+
+# Naming Notes:
+# name functions in PascalCase with approved verbs.
+# put your initials in the names of functions you create to avoid
+# conflicts. like Get-asComputer instead of Get-Computer
+# you can check approved Verbs with:
+Get-Verb | Sort-Object -Property Verb
+
+# you can check all loaded functions with:
+Get-ChildItem -Path Function:\Get-*Version
+
+# best practice is to include comment-based help with your functions. Like this:
+
+<#
+.SYNOPSIS
+.DESCRIPTION
+.PARAMETER
+.EXAMPLE
+.INPUTS
+.OUTPUTS
+.NOTES
+
+#>
+
+
+# here's the format for a basic function. You can have as many paramaters and as much code as you need. Just remember that the functions are single-purpose only.
+
+function <function> {
+
+    param (
+        <$param>
+    )
+
+    <code here>
+}
+
+
+# here's the format for an advanced function.
+# [CmdletBinding()] is technically just a paramater. You can past
+# additonal params to it like this:
+# [CmdletBinding(SupportsShouldProcess)] # adds -confirm and -whatif
+
+function <function> {
+
+    [CmdletBinding()]
+    param (
+        <[datatype]><$param>
+    )
+
+    <code here>
+}
+
+
+# different parameter examples:
+    param (
+        [string]$ComputerName
+    )
+    param (
+        [Parameter(Mandatory)]
+        [string]$ComputerName
+    )
+    param (
+        [Parameter(Mandatory)]
+        [string[]]$ComputerName # allows for lists
+    )
+    param (
+    [ValidateNotNullOrEmpty()]
+    [string[]]$ComputerName = $env:COMPUTERNAME # sets a default value if nothing is provided. Avoid setting to static values this way.
+    )
+    param (
+        [Parameter(Mandatory,
+                   ValueFromPipeline,
+                   ValueFromPipelineByPropertyName)]
+        [string[]]$ComputerName # allows values from pipeline
+    )
